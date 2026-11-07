@@ -1,0 +1,21 @@
+services:
+  clickhouse:
+    image: clickhouse/clickhouse-server:24.8
+    container_name: tags-clickhouse
+    ports:
+      - "8123:8123"
+      - "9000:9000"
+    environment:
+      CLICKHOUSE_DB: search
+      CLICKHOUSE_USER: app
+      CLICKHOUSE_PASSWORD: app
+    volumes:
+      - ch_data:/var/lib/clickhouse
+      - ./data:/var/lib/clickhouse/user_files/data:ro
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+
+volumes:
+  ch_data:
