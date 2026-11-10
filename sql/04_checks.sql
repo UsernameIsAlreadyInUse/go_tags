@@ -15,6 +15,16 @@ FROM search.query_tags
 WHERE query != trimBoth(replaceRegexpAll(lowerUTF8(query), '\\s+', ' '))
    OR tag   != trimBoth(replaceRegexpAll(lowerUTF8(tag),   '\\s+', ' '));
 
-SELECT '6. «Платье » и «платье» нормализуются одинаково' AS name,
-       trimBoth(replaceRegexpAll(lowerUTF8('Платье '), '\\s+', ' '))
-     = trimBoth(replaceRegexpAll(lowerUTF8('платье'),  '\\s+', ' ')) AS passed;
+SELECT '6. «Платье » и «платье» дают одинаковые теги' AS name,
+       length(a) > 0 AND a = b AS passed
+FROM
+(
+    SELECT groupArray((tag, users)) AS a
+    FROM (SELECT tag, users FROM search.query_tags
+          WHERE query = trimBoth(replaceRegexpAll(lowerUTF8('Платье '), '\\s+', ' ')) ORDER BY rank)
+) AS x,
+(
+    SELECT groupArray((tag, users)) AS b
+    FROM (SELECT tag, users FROM search.query_tags
+          WHERE query = trimBoth(replaceRegexpAll(lowerUTF8('платье'), '\\s+', ' ')) ORDER BY rank)
+) AS y;

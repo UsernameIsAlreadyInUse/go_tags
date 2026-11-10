@@ -46,6 +46,10 @@ func (h *Handler) handleTags(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Гарантируем [] вместо null, какой бы Store ни использовался.
+	if result == nil {
+		result = []tags.Tag{}
+	}
 	h.writeJSON(w, http.StatusOK, result)
 }
 

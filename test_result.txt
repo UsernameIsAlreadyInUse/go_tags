@@ -1,0 +1,62 @@
+?   	searchtags/cmd/ping	[no test files]
+?   	searchtags/cmd/server	[no test files]
+=== RUN   TestTags_EmptyQuery_Returns400
+=== RUN   TestTags_EmptyQuery_Returns400//api/tags
+=== RUN   TestTags_EmptyQuery_Returns400//api/tags?q=
+=== RUN   TestTags_EmptyQuery_Returns400//api/tags?q=%20%20%20
+--- PASS: TestTags_EmptyQuery_Returns400 (0.00s)
+    --- PASS: TestTags_EmptyQuery_Returns400//api/tags (0.00s)
+    --- PASS: TestTags_EmptyQuery_Returns400//api/tags?q= (0.00s)
+    --- PASS: TestTags_EmptyQuery_Returns400//api/tags?q=%20%20%20 (0.00s)
+=== RUN   TestTags_ReturnsTagsInOrder
+--- PASS: TestTags_ReturnsTagsInOrder (0.00s)
+=== RUN   TestTags_NormalizationGivesSameAnswer
+--- PASS: TestTags_NormalizationGivesSameAnswer (0.00s)
+=== RUN   TestTags_NoTags_ReturnsEmptyListWith200
+--- PASS: TestTags_NoTags_ReturnsEmptyListWith200 (0.00s)
+=== RUN   TestTags_StoreError_Returns500WithoutDetails
+--- PASS: TestTags_StoreError_Returns500WithoutDetails (0.00s)
+=== RUN   TestTags_WrongMethod_Returns405
+--- PASS: TestTags_WrongMethod_Returns405 (0.00s)
+PASS
+ok  	searchtags/internal/api	0.007s
+=== RUN   TestNormalize
+=== RUN   TestNormalize/уже_нормальный
+=== RUN   TestNormalize/верхний_регистр,_кириллица
+=== RUN   TestNormalize/смешанный_регистр,_латиница
+=== RUN   TestNormalize/пробелы_по_краям
+=== RUN   TestNormalize/двойные_пробелы_внутри
+=== RUN   TestNormalize/табы_и_переводы_строк
+=== RUN   TestNormalize/всё_сразу
+=== RUN   TestNormalize/пустая_строка
+=== RUN   TestNormalize/только_пробелы
+=== RUN   TestNormalize/неразрывный_пробел_не_трогаем
+--- PASS: TestNormalize (0.00s)
+    --- PASS: TestNormalize/уже_нормальный (0.00s)
+    --- PASS: TestNormalize/верхний_регистр,_кириллица (0.00s)
+    --- PASS: TestNormalize/смешанный_регистр,_латиница (0.00s)
+    --- PASS: TestNormalize/пробелы_по_краям (0.00s)
+    --- PASS: TestNormalize/двойные_пробелы_внутри (0.00s)
+    --- PASS: TestNormalize/табы_и_переводы_строк (0.00s)
+    --- PASS: TestNormalize/всё_сразу (0.00s)
+    --- PASS: TestNormalize/пустая_строка (0.00s)
+    --- PASS: TestNormalize/только_пробелы (0.00s)
+    --- PASS: TestNormalize/неразрывный_пробел_не_трогаем (0.00s)
+=== RUN   TestNormalize_Idempotent
+--- PASS: TestNormalize_Idempotent (0.00s)
+PASS
+ok  	searchtags/internal/tags	0.006s
+=== RUN   TestPage_EscapesUserInput
+--- PASS: TestPage_EscapesUserInput (0.00s)
+=== RUN   TestPage_NoTags_ShowsMessage
+--- PASS: TestPage_NoTags_ShowsMessage (0.00s)
+=== RUN   TestPage_ShowsTagsAsLinks
+--- PASS: TestPage_ShowsTagsAsLinks (0.00s)
+=== RUN   TestPage_EmptyQuery_ShowsOnlyForm
+--- PASS: TestPage_EmptyQuery_ShowsOnlyForm (0.00s)
+=== RUN   TestPage_StoreError_Shows500
+--- PASS: TestPage_StoreError_Shows500 (0.00s)
+=== RUN   TestPage_UnknownPath_Returns404
+--- PASS: TestPage_UnknownPath_Returns404 (0.00s)
+PASS
+ok  	searchtags/internal/web	0.008s
