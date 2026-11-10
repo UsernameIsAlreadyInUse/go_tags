@@ -15,6 +15,7 @@ import (
 
 	"searchtags/internal/api"
 	"searchtags/internal/tags"
+	"searchtags/internal/web"
 )
 
 func main() {
@@ -52,6 +53,11 @@ func run(logger *slog.Logger) error {
 
 	mux := http.NewServeMux()
 	api.NewHandler(store, logger).Register(mux)
+	page, err := web.NewHandler(store, logger)
+	if err != nil {
+		return fmt.Errorf("init web handler: %w", err)
+	}
+	page.Register(mux)
 
 	srv := &http.Server{
 		Addr:              ":" + getenv("PORT", "8080"),

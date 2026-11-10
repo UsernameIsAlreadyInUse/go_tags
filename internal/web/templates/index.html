@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Поисковые теги</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.5;
+    }
+    main { max-width: 640px; margin: 0 auto; padding: 48px 16px; }
+    h1 { font-size: 28px; margin: 0 0 24px; }
+    .search { display: flex; gap: 8px; }
+    .search input {
+      flex: 1;
+      padding: 12px 14px;
+      font-size: 16px;
+      border: 1px solid #8886;
+      border-radius: 8px;
+    }
+    .search button {
+      padding: 12px 20px;
+      font-size: 16px;
+      border: 0;
+      border-radius: 8px;
+      background: #2563eb;
+      color: #fff;
+      cursor: pointer;
+    }
+    .search button:hover { background: #1d4ed8; }
+    .tags { list-style: none; margin: 20px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+    .tags a {
+      display: inline-block;
+      padding: 6px 14px;
+      border: 1px solid #8886;
+      border-radius: 999px;
+      text-decoration: none;
+      color: inherit;
+    }
+    .tags a:hover { background: #2563eb22; border-color: #2563eb; }
+    .empty { margin-top: 20px; color: #888; }
+    .error { margin-top: 20px; color: #dc2626; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Поиск</h1>
+
+    <form class="search" action="/" method="get">
+      <input type="search" name="q" value="{{ .Query }}" placeholder="Например: платье" autocomplete="off" autofocus>
+      <button type="submit">Найти</button>
+    </form>
+
+    {{ if .Error }}
+      <p class="error">{{ .Error }}</p>
+    {{ else if .Searched }}
+      {{ if .Tags }}
+        <ul class="tags">
+          {{ range .Tags }}
+            <li><a href="/?q={{ .Tag }}" title="{{ .Users }} пользователей">{{ .Tag }}</a></li>
+          {{ end }}
+        </ul>
+      {{ else }}
+        <p class="empty">Для этого запроса пока нет тегов</p>
+      {{ end }}
+    {{ end }}
+  </main>
+</body>
+</html>
